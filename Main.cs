@@ -293,7 +293,7 @@ namespace MCRC
             {
                 using (FileStream fsDst = new FileStream(rcon_path, FileMode.CreateNew, FileAccess.Write))
                 {
-                    byte[] bytes = Resources.getMcrcon();
+                    byte[] bytes = Resources.mcrcon;
                     fsDst.Write(bytes, 0, bytes.Length);
                 }
                 return File.Exists(rcon_path);

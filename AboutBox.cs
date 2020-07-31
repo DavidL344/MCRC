@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -19,13 +20,7 @@ namespace MCRC
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = "License information (mcrcon):\r\n\r\n"
-                                           + "Copyright (c) 2012-2020, Tiiffi <tiiffi at gmail>\r\n"
-                                           + "This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.\r\n\r\n"
-                                           + "Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:\r\n\r\n"
-                                           + "1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.\r\n\r\n"
-                                           + "2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.\r\n\r\n"
-                                           + "3. This notice may not be removed or altered from any source distribution.";
+            this.textBoxDescription.Text = ReadLicense();
         }
 
         #region Assembly Attribute Accessors
@@ -111,6 +106,18 @@ namespace MCRC
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private string ReadLicense()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "LICENSE";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
     }
 }
