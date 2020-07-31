@@ -103,7 +103,7 @@ namespace MCRC
         }
         #endregion
 
-        private void okButton_Click(object sender, EventArgs e)
+        private void AboutBox_Ok(object sender, EventArgs e)
         {
             this.Close();
         }

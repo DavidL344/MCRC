@@ -23,7 +23,7 @@ namespace MCRC
         private int rconPort;
         private string rconPassword;
 
-        private ProcessStartInfo rconConnection = new ProcessStartInfo
+        private readonly ProcessStartInfo rconConnection = new ProcessStartInfo
         {
             FileName = rcon_path,
             UseShellExecute = false,
