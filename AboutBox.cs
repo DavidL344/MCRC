@@ -110,10 +110,8 @@ namespace MCRC
 
         private string ReadLicense()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "LICENSE";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            byte[] license = MCRC.Properties.Resources.LICENSE;
+            using (MemoryStream stream = new MemoryStream(license))
             using (StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
